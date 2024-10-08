@@ -1,0 +1,41 @@
+import pandas as pd
+import os
+import re
+
+# Define paths to the velocity and acceleration folders
+base_folder = "extracted_data"  # Change this to your actual path
+velocity_folder = os.path.join(base_folder, "velocity")
+acceleration_folder = os.path.join(base_folder, "acceleration")
+
+# Make sure the folders exist
+os.makedirs(velocity_folder, exist_ok=True)
+os.makedirs(acceleration_folder, exist_ok=True)
+
+
+"""
+Extracts the knife sharpness value from the filename and categorizes it.
+:param file_name: String, e.g., 'MVN-J-Boning-64-001_Acceleration.xlsx'
+:return: Categorical label ('Blunt', 'Medium', 'Sharp')
+"""
+# Categorize knife sharpness
+
+
+def categorize_sharpness(sharpness_value):
+    if sharpness_value >= 85:
+        return 'Sharp'
+    elif 70 <= sharpness_value <= 84:
+        return 'Medium'
+    else:
+        return 'Blunt'
+
+
+def process_csv(folder_path):
+    for file_name in os.listdir(folder_path):
+        if file_name.endswith(".csv"):
+
+            # Read the CSV file
+            file_path = os.path.join(folder_path, file_name)
+
+            parts = file_name.split("-")
+
+            if len(parts) >= 4:

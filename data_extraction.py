@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 
+# Define input and output folders
 input_folder = "data"
 velocity_output_folder = "extracted_data/velocity"
 acceleration_output_folder = "extracted_data/acceleration"
@@ -23,10 +24,10 @@ for file_name in os.listdir(input_folder):
 
         # Create output paths
         velocity_output_path = os.path.join(
-            velocity_output_folder, f"{file_name.split('.')[0]}_Velocity.csv")
+            velocity_output_folder, f"{file_name.split('.')[0]}-Velocity.csv")
 
         acceleration_output_path = os.path.join(
-            acceleration_output_folder, f"{file_name.split('.')[0]}_Acceleration.csv")
+            acceleration_output_folder, f"{file_name.split('.')[0]}-Acceleration.csv")
 
         # Save the extracted data to a new csv file
         velocity_df.to_csv(velocity_output_path, index=False)
