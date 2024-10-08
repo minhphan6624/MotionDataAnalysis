@@ -39,3 +39,16 @@ def process_csv(folder_path):
             parts = file_name.split("-")
 
             if len(parts) >= 4:
+                # The 4th element is the sharpness value
+                sharpness_value = int(parts[3])
+                sharpness_label = categorize_sharpness(sharpness_value)
+
+                df = pd.read_csv(file_path)
+                df['Knife Sharpness'] = sharpness_label
+                df.to_csv(file_path, index=False)
+                print(
+                    f"Processed and saved {file_name} with sharpness category: {sharpness_label}")
+
+
+process_csv(velocity_folder)
+process_csv(acceleration_folder)
