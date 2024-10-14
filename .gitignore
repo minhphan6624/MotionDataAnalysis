@@ -1,0 +1,11 @@
+# Any folder with "data" in its name should be ignored
+
+/data/
+/extracted_data/
+merged_data/
+categorized_data/
+
+
+# virtual environment
+/motiondataanalysis/
+
