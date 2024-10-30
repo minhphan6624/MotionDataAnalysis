@@ -1,12 +1,7 @@
 # Any folder with "data" in its name should be ignored
 
 data/
-extracted_data/
-acc_vel_merged_data/
-categorized_data/
-bone_slice/
-bone_slice_min/
-bone_slice_merged/
+
 
 
 # virtual environment
