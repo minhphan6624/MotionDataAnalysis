@@ -24,7 +24,7 @@ def split_data(df, test_size=0.2, random_state=42):
     
     # Get feature columns (excluding target variables)
     feature_cols = [col for col in df.columns 
-                   if col not in ['Main_Activity', 'Label', 'Knife_Sharpness']]
+                   if col not in ['Main_Activity', 'Label', 'Knife_Sharpness_Category']]
     
     # Features
     X = df[feature_cols]
@@ -55,10 +55,10 @@ def split_data(df, test_size=0.2, random_state=42):
     # 3. Knife Sharpness (3-class Classification)
     splits['sharpness'] = train_test_split(
         X, 
-        df['Knife_Sharpness'],
+        df['Knife_Sharpness_Category'],
         test_size=test_size,
         random_state=random_state,
-        stratify=df['Knife_Sharpness']
+        stratify=df['Knife_Sharpness_Category']
     )
     
     return splits
@@ -68,7 +68,7 @@ def split_data(df, test_size=0.2, random_state=42):
 """
 def get_feature_names(df):
     return [col for col in df.columns 
-            if col not in ['Main_Activity', 'Label', 'Knife_Sharpness']]
+            if col not in ['Main_Activity', 'Label', 'Knife_Sharpness_Category']]
 
 def get_split_shapes(splits):
     """
