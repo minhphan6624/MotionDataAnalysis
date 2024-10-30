@@ -1,9 +1,8 @@
 # Any folder with "data" in its name should be ignored
-
 data/
 
-
-
 # virtual environment
-/motiondataanalysis/
+/venv/
+
+/src/__pycache__/
 
