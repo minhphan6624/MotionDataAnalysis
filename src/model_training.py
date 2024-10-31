@@ -13,15 +13,15 @@ import numpy as np
 def get_models(task_type):    
     if task_type == 'binary':
         return {
-            'Logistic Regression': LogisticRegression(random_state=42),
-            'Random Forest': RandomForestClassifier(random_state=42),
-            'XGBoost': XGBClassifier(random_state=42)
+            'Logistic Regression': LogisticRegression(random_state=42, max_iter=1000),
+            'Random Forest': RandomForestClassifier(random_state=42, n_estimators=100, max_depth=20, min_samples_split=10, min_samples_leaf=4),
+            'XGBoost': XGBClassifier(random_state=42, n_estimators=100, max_depth=6, learning_rate=0.1)
         }
     else:  # multiclass or three_class
         return {
             'Decision Tree': DecisionTreeClassifier(random_state=42, class_weight='balanced'),
-            'Random Forest': RandomForestClassifier(random_state=42, class_weight='balanced'),
-            'XGBoost': XGBClassifier(random_state=42)
+            'Random Forest': RandomForestClassifier(random_state=42, class_weight='balanced', n_estimators=100, max_depth=20, min_samples_split=10, min_samples_leaf=4),
+            'XGBoost': XGBClassifier(random_state=42, n_estimators=100, max_depth=6, learning_rate=0.1)
         }
 
 """
