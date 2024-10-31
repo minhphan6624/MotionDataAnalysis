@@ -19,15 +19,15 @@ def get_models(task_type):
         }
     else:  # multiclass or three_class
         return {
-            'Decision Tree': DecisionTreeClassifier(random_state=42),
-            'Random Forest': RandomForestClassifier(random_state=42),
+            'Decision Tree': DecisionTreeClassifier(random_state=42, class_weight='balanced'),
+            'Random Forest': RandomForestClassifier(random_state=42, class_weight='balanced'),
             'XGBoost': XGBClassifier(random_state=42)
         }
 
 """
     Train and evaluate models for a specific task
 """
-def train_and_evaluate(X_train, X_test, y_train, y_test, task_type, task_name):
+def train_models_for_task(X_train, X_test, y_train, y_test, task_type, task_name):
     
     models = get_models(task_type)
     results = {}
@@ -56,44 +56,5 @@ def train_and_evaluate(X_train, X_test, y_train, y_test, task_type, task_name):
             'confusion_matrix': conf_matrix,
             'predictions': y_pred
         }
-        
-        # Print results
-        print(f"Accuracy: {accuracy:.4f}")
-        print("\nClassification Report:")
-        print(report)
-        print("\nConfusion Matrix:")
-        print(conf_matrix)
-    
-    return results
-
-"""
-    Train models for all three tasks
-"""
-def train_all_models(splits): 
-    results = {}
-    
-    # 1. Main Activity (Binary)
-    X_train, X_test, y_train, y_test = splits['main_activity']
-    results['main_activity'] = train_and_evaluate(
-        X_train, X_test, y_train, y_test,
-        task_type='binary',
-        task_name='Main Activity'
-    )
-    
-    # 2. Label (Multiclass)
-    X_train, X_test, y_train, y_test = splits['label']
-    results['label'] = train_and_evaluate(
-        X_train, X_test, y_train, y_test,
-        task_type='multiclass',
-        task_name='Label'
-    )
-    
-    # 3. Knife Sharpness
-    X_train, X_test, y_train, y_test = splits['sharpness']
-    results['sharpness'] = train_and_evaluate(
-        X_train, X_test, y_train, y_test,
-        task_type='three_class',
-        task_name='Knife Sharpness'
-    )
     
     return results
